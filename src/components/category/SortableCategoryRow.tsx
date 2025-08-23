@@ -45,8 +45,8 @@ export default function SortableCategoryRow({
           {...attributes}
           {...listeners}
           className="flex items-center justify-center h-full cursor-grab active:cursor-grabbing hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors p-3"
-          onClick={(e) => e.stopPropagation()}
-          onPointerDown={(e) => e.stopPropagation()}
+          onClick={(e) => e?.stopPropagation()}
+          onPointerDown={(e) => e?.stopPropagation()}
         >
           <div className="flex flex-col gap-1 pointer-events-none">
             <div className="w-1 h-1 bg-gray-400 rounded-full"></div>
@@ -85,11 +85,12 @@ export default function SortableCategoryRow({
         <div className="flex items-center gap-3" onClick={(e) => e.stopPropagation()}>
           <Button
             onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
+              if (e) {
+                e.preventDefault();
+                e.stopPropagation();
+              }
               onEdit(category.id);
             }}
-            onPointerDown={(e) => e.stopPropagation()}
             size="sm"
             variant="outline"
             startIcon={<PencilIcon />}
@@ -98,11 +99,12 @@ export default function SortableCategoryRow({
           </Button>
           <Button
             onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
+              if (e) {
+                e.preventDefault();
+                e.stopPropagation();
+              }
               onDelete(category.id);
             }}
-            onPointerDown={(e) => e.stopPropagation()}
             size="sm"
             variant="outline"
             startIcon={<TrashBinIcon />}
