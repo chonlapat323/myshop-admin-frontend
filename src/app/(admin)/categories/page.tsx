@@ -1,20 +1,20 @@
 "use client";
 
-import { useState } from "react";
-import { useCategories } from "@/hooks/categories/useCategories";
-import { Table, TableBody, TableCell, TableHeader, TableRow } from "@/components/ui/table";
+import SortableCategoryRow from "@/components/category/SortableCategoryRow";
+import FilterBar from "@/components/tables/FilterBar";
 import Pagination from "@/components/tables/Pagination";
 import ConfirmModal from "@/components/ui/modal/ConfirmModal";
-import { BoxIconLine } from "@/icons";
-import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
-import { FilterOption } from "@/types/components/tables/FilterBar";
+import { Table, TableBody, TableCell, TableHeader, TableRow } from "@/components/ui/table";
+import { useCategories } from "@/hooks/categories/useCategories";
+import { useSortableCategory } from "@/hooks/categories/useSortableCategory";
 import { useFilter } from "@/hooks/components/tables/useFilter";
-import FilterBar from "@/components/tables/FilterBar";
-import SortableCategoryRow from "@/components/category/SortableCategoryRow";
+import { BoxIconLine } from "@/icons";
+import { FilterOption } from "@/types/components/tables/FilterBar";
 import { DndContext, closestCenter } from "@dnd-kit/core";
 import { SortableContext } from "@dnd-kit/sortable";
-import { useSortableCategory } from "@/hooks/categories/useSortableCategory";
+import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
 
 export default function CategoryListPage() {
   const [page, setPage] = useState(1);
@@ -112,6 +112,7 @@ export default function CategoryListPage() {
               <Table>
                 <TableHeader>
                   <TableRow>
+                    <TableCell className="w-12 py-3 font-medium text-left">⋮⋮</TableCell>
                     <TableCell className="w-1/4 py-3 font-medium text-left">Image</TableCell>
                     <TableCell className="w-1/4 py-3 font-medium text-left">Name</TableCell>
                     <TableCell className="w-1/4 py-3 font-medium text-left">Status</TableCell>
@@ -126,6 +127,7 @@ export default function CategoryListPage() {
                   <Table>
                     <TableHeader>
                       <TableRow>
+                        <TableCell className="w-12 py-3 font-medium text-left">⋮⋮</TableCell>
                         <TableCell className="w-1/4 py-3 font-medium text-left">Image</TableCell>
                         <TableCell className="w-1/4 py-3 font-medium text-left">Name</TableCell>
                         <TableCell className="w-1/4 py-3 font-medium text-left">Status</TableCell>

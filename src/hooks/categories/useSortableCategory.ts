@@ -1,10 +1,10 @@
-import { arrayMove, verticalListSortingStrategy } from "@dnd-kit/sortable";
+import { HttpError } from "@/lib/HttpError";
+import { updateCategoryOrder } from "@/services/category.service";
 import { Category } from "@/types/category";
 import { DragEndEvent } from "@dnd-kit/core";
+import { arrayMove, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import { useEffect, useState } from "react";
-import { updateCategoryOrder } from "@/services/category.service";
 import { toast } from "sonner";
-import { HttpError } from "@/lib/HttpError";
 
 type UseSortableCategoryOptions = {
   categories: Category[];
@@ -39,7 +39,6 @@ export function useSortableCategory({
     }));
 
     try {
-      debugger;
       await updateCategoryOrder(orderedPayload);
       toast.success("Category order updated");
     } catch (err) {

@@ -1,11 +1,11 @@
 "use client";
 
+import Button from "@/components/ui/button/Button";
+import { TableCell, TableRow } from "@/components/ui/table";
+import { PencilIcon, TrashBinIcon } from "@/icons";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { TableRow, TableCell } from "@/components/ui/table";
 import Image from "next/image";
-import Button from "@/components/ui/button/Button";
-import { PencilIcon, TrashBinIcon } from "@/icons";
 
 type SortableCategoryRowProps = {
   category: {
@@ -38,10 +38,25 @@ export default function SortableCategoryRow({
     <TableRow
       ref={setNodeRef}
       style={style}
-      {...attributes}
-      {...listeners}
       className={`transition-opacity duration-300 ${isDeleting ? "opacity-0" : "opacity-100"}`}
     >
+      <TableCell className="w-12 p-0">
+        <div
+          {...attributes}
+          {...listeners}
+          className="flex items-center justify-center h-full cursor-grab active:cursor-grabbing hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors p-3"
+          onClick={(e) => e.stopPropagation()}
+          onPointerDown={(e) => e.stopPropagation()}
+        >
+          <div className="flex flex-col gap-1 pointer-events-none">
+            <div className="w-1 h-1 bg-gray-400 rounded-full"></div>
+            <div className="w-1 h-1 bg-gray-400 rounded-full"></div>
+            <div className="w-1 h-1 bg-gray-400 rounded-full"></div>
+            <div className="w-1 h-1 bg-gray-400 rounded-full"></div>
+            <div className="w-1 h-1 bg-gray-400 rounded-full"></div>
+          </div>
+        </div>
+      </TableCell>
       <TableCell>
         <Image
           src={
@@ -67,9 +82,14 @@ export default function SortableCategoryRow({
         </span>
       </TableCell>
       <TableCell className="text-left py-3">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3" onClick={(e) => e.stopPropagation()}>
           <Button
-            onClick={() => onEdit(category.id)}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              onEdit(category.id);
+            }}
+            onPointerDown={(e) => e.stopPropagation()}
             size="sm"
             variant="outline"
             startIcon={<PencilIcon />}
@@ -77,7 +97,12 @@ export default function SortableCategoryRow({
             Edit
           </Button>
           <Button
-            onClick={() => onDelete(category.id)}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              onDelete(category.id);
+            }}
+            onPointerDown={(e) => e.stopPropagation()}
             size="sm"
             variant="outline"
             startIcon={<TrashBinIcon />}
